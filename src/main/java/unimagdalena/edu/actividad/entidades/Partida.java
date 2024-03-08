@@ -2,10 +2,15 @@ package unimagdalena.edu.actividad.entidades;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +26,7 @@ import lombok.Setter;
 public class Partida {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -35,13 +40,13 @@ public class Partida {
 
     @Column
     private String provincia;
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column
     private LocalDate fecha;
-    @Temporal(TemporalType.TIME)
+
     @Column
     private LocalTime hora_comienzo;
-    @Temporal(TemporalType.TIME)
+
     @Column
     private LocalTime hora_final;
 
@@ -55,6 +60,6 @@ public class Partida {
     private String varchar;
 
     @ManyToMany(mappedBy = "partidas")
-    private List<Usuario> usuarios;
+    private Set<Usuario> usuarios;
     
 }

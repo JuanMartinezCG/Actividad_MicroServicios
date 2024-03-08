@@ -1,7 +1,6 @@
 package unimagdalena.edu.actividad.entidades;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -15,7 +14,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,23 +25,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String nombre;
+    private String name;
 
     @Column
-    private String apellido;
-
-    @Column(unique = true)
     private String email;
 
-    @Column(unique = true,nullable = true)
+
+    @Column
     private String username;
 
     @Column
@@ -69,10 +64,11 @@ public class Usuario {
 
     @OneToMany
     @JoinColumn(name ="usuario_id")
-    private List<Sugeriencia> sugerencias;
+    private Set<Sugeriencia> sugerencias;
 
     @OneToMany
-    private List<Mensaje> mensajes;
+    @JoinColumn(name ="usuario_id")
+    private Set<Mensaje> mensajes;
 
 
     @ManyToMany
@@ -81,6 +77,6 @@ public class Usuario {
         joinColumns = @JoinColumn(name="usuario_id"),
         inverseJoinColumns = @JoinColumn(name = "partida_id")
     )
-    private List<Partida> partidas;
+    private Set<Partida> partidas;
     
 }

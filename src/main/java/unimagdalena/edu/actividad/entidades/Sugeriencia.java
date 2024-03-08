@@ -2,7 +2,12 @@ package unimagdalena.edu.actividad.entidades;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,13 +27,10 @@ public class Sugeriencia {
 
     @Column
     private String descripcion;
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column
     private LocalDate create_at;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario" , nullable = false)
-    private Usuario usuarios;
     
     
 }
